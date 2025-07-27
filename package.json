@@ -1,0 +1,16 @@
+{
+  "name": "super-blocks",
+  "version": "1.0.0",
+  "description": "Super Blocks plugin directory structure:",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build assets/src/blocks.js --output-path=assets/js --output-filename=blocks.js",
+    "start": "wp-scripts start assets/src/blocks.js --output-path=assets/js --output-filename=blocks.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "^30.20.0"
+  }
+}
