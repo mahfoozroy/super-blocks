@@ -313,6 +313,21 @@ registerBlockType('super-blocks/super-image', {
             height: attributes.height ? `${attributes.height}px` : undefined,
             objectFit: attributes.objectFit || undefined,
         };
+        
+        // Build Spotlight.js configuration
+        const spotlightConfig = {
+            theme: attributes.spotlightTheme,
+            animation: attributes.spotlightAnimation,
+            autoplay: attributes.enableAutoplay,
+            infinite: attributes.enableInfinite,
+            spinner: attributes.enableSpinner,
+            preload: attributes.enablePreload,
+            autohide: attributes.autohide,
+            autofit: attributes.autofit,
+            speed: attributes.enableAutoplay ? attributes.autoplaySpeed : undefined,
+            control: Object.keys(attributes.showControls || {}).filter(key => attributes.showControls[key])
+        };
+        
         return (
             <figure className="super-blocks-super-image" style={style}>
                 <img
@@ -320,9 +335,18 @@ registerBlockType('super-blocks/super-image', {
                     alt={attributes.imageAlt}
                     style={{ objectFit: attributes.objectFit || undefined }}
                     data-spotlight={attributes.enableLightbox ? 'on' : undefined}
+                    data-spotlight-config={attributes.enableLightbox ? JSON.stringify(spotlightConfig) : undefined}
                     data-scroll-speed={attributes.enableImageScroll ? attributes.scrollSpeed : undefined}
+                    data-scroll-direction={attributes.enableImageScroll ? attributes.scrollDirection : undefined}
+                    data-scroll-trigger={attributes.enableImageScroll ? attributes.scrollTrigger : undefined}
                     data-magnify-factor={attributes.enableMagnify ? attributes.magnifyFactor : undefined}
                     data-magnify-offset={attributes.enableMagnify ? attributes.magnifyOffset : undefined}
+                    className={[
+                        attributes.enableImageScroll ? 'has-scroll-effect' : '',
+                        attributes.enableImageScroll ? `scroll-${attributes.scrollDirection}` : '',
+                        attributes.enableImageScroll ? `scroll-trigger-${attributes.scrollTrigger}` : '',
+                        attributes.enableMagnify ? 'has-magnify' : '',
+                    ].filter(Boolean).join(' ')}
                 />
                 {attributes.imageCaption && (
                     <figcaption className="super-blocks-super-image-caption">
